@@ -4,6 +4,7 @@ import io, json
 import pandas as pd
 from accounts.models import UserProfile, AdminPermissionModel
 from django.contrib.auth.models import User
+from dashboard.models import UploadImageModel
 
 # Create your tests here.
 
@@ -83,7 +84,6 @@ def has_permission(user_id, action, resource):
     return False
 
 def get_general_settings(file_path):
-    from .models import UploadImageModel
 
     file = open(file_path, 'r')
     settings = {}

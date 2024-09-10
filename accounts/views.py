@@ -26,7 +26,6 @@ def Login(request):
             user = users.first()
             username = user.username
             auth_user = authenticate(request, username=username, password=password)
-            print(auth_user, username, password)
             if auth_user is not None:
 
                 has_userprofile = False
