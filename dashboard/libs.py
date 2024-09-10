@@ -4,7 +4,7 @@ import io, json
 import pandas as pd
 from accounts.models import UserProfile, AdminPermissionModel
 from django.contrib.auth.models import User
-from dashboard.models import UploadImageModel
+from .models import UploadImageModel
 
 # Create your tests here.
 
@@ -92,7 +92,9 @@ def get_general_settings(file_path):
     if data:
         settings = json.loads(data)
         if settings.get('img_id'):
-            img_obj = UploadImageModel.objects.get(id=settings.get('img_id'))
+            try:
+                img_obj = UploadImageModel.objects.get(id=settings.get('img_id'))
+            except:img_obj=''
     file.close()
     return settings, img_obj
 
