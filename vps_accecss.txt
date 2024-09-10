@@ -1,0 +1,2 @@
+ssh root@77.37.122.10
+Mahranabuabed@2907

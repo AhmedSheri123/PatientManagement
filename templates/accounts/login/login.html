@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+
+{% endblock links %}
+
+
+{% block sheri %}
+
+
+<div class="pt-5 container" dir="rtl">
+
+  <div class=" mt-5 p-4"
+    style="max-width: 600px; background-color: #f1f1f1; border-radius: 5px; border: 1px solid rgb(211, 211, 211); display: block; margin: auto;     box-shadow: 0 10px 15px rgba(0, 0, 0, .1) !important;">
+    {% if img_obj %}
+    <img class="m-auto rounded-circle d-block" src="{{img_obj.img.url}}" style="width: 150px; margin: 10px auto;" alt="">
+    {% endif %}
+    
+    <h4 class="p-3 text-center">نظام {{settings.name}} لأدارة المرضى</h4>
+    <p >الرجاء اختيار طريقة تسجيل الدخول</p>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
+          role="tab" aria-controls="home-tab-pane" aria-selected="true">שם משתמש</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
+          role="tab" aria-controls="profile-tab-pane" aria-selected="false">بريد الالكتروني</button>
+      </li>
+
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+
+
+
+        <div style="max-width: 500px;" dir="rtl">
+          <form method="post" class="pt-3">
+            {% csrf_token %}
+            <input type="hidden" name="type" value="1">
+            <div class="mb-3">
+              <label for="" class="form-label">שם משתמש</label>
+              <input type="text" id="username" class="form-control" name="username" placeholder="שם משתמש"
+                aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label" >كلمة مرور الحساب</label>
+
+              <div style="position: relative;">
+                <input type="password" name="password" id="password" placeholder="كلمة مرور" class="form-control" id="exampleInputPassword1">
+                <i class="bi bi-eye-fill" style="position: absolute; top: 7px; left: 10px; cursor: pointer;"
+                  onclick="checkPassword()"></i>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+
+
+          </form>
+        </div>
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+
+
+        <div style="max-width: 500px;" dir="rtl">
+          <form method="post" class="pt-3">
+            {% csrf_token %}
+            <input type="hidden" name="type" value="2">
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">البريد الالكتروني</label>
+              <input type="email" name="email" placeholder="بريد الالكتروني" class="form-control"
+                id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label" >كلمة مرور الحساب</label>
+
+              <div style="position: relative;">
+                <input type="password" name="password" id="password" placeholder="كلمة مرور" class="form-control" id="exampleInputPassword1">
+                <i class="bi bi-eye-fill" style="position: absolute; top: 7px; left: 10px; cursor: pointer;"
+                  onclick="checkPassword()"></i>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+
+
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+<style>
+  .iti {
+    width: 100%;
+
+  }
+
+  #tel {
+    text-align: right;
+  }
+</style>
+
+
+<script>
+  function checkPassword() {
+    let obj = document.querySelector('#password');
+    if (obj.type == 'text') {
+      obj.type = 'password'
+    } else {
+      obj.type = 'text'
+    }
+
+  }
+</script>
+{% endblock sheri %}
