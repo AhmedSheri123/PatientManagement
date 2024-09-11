@@ -848,6 +848,7 @@ def MedicalTestsReportToPDF(request, id):
     os_name = os.name
     if os_name != 'nt':
         path_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
+        
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     path = f'media/reports/{request.user.username}{request.user.id}.pdf'
     pdfkit.from_string(str(rendered), str(BASE_DIR/path), configuration=config, options={"enable-local-file-access": ""})

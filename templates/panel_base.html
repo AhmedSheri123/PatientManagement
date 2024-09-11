@@ -55,14 +55,14 @@ table {
 
 }
 
-        @font-face {
+        {% comment %} @font-face {
         font-family: 'Bahij'; /*a name to be used later*/
         src: url('{% static 'font/Bahij_TheSansArabic-Bold.ttf' %}'); /*URL to font*/
     }
     
     p, div, h1, h2, h3 {
         font-family: 'Bahij' !important;
-    }
+    } {% endcomment %}
 </style>
   
     <div class="ui menu fixed-top" style="overflow:scroll; margin: 0; background-color: #212529; border-radius: 0 !important; border-bottom: solid 1px rgba(255, 255, 255, 0.163);     height: 75px!important; z-index: 1500;">
