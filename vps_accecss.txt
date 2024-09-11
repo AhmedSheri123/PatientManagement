@@ -1,2 +1,6 @@
 ssh root@77.37.122.10
 Mahranabuabed@2907
+
+cd /var/www/PatientManagement/
+
+systemctl restart apache2

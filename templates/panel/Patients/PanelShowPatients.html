@@ -58,7 +58,16 @@
     <div style="display: flex; align-items: center; justify-content: center;    margin-top: 30px;">
       <input type="submit" name="" id="" value="חיפוש" class="btn btn-primary" style="background-color: purple; color: white !important; margin: 0; margin-left: 10px;">
       <button type="button" class="btn btn-danger disabled ms-2" onclick="submitSelected('delete')" id="deleteBtn">מחיקה</button>
-      <button type="button" class="btn btn-warning disabled ms-2" onclick="submitSelected('xlsx')" id="exelBtn">export</button>
+      <div class="rounded-3 ms-2 p-1" style="background-color: #f1f1f1;">
+        <select name="export_format" onchange="{document.querySelector('#out_format').value = this.value}" id="export_format" class="btn btn-warning p-1 m-0 me-1">
+          <option value="xlsx">xlsx</option>
+          <option value="html">html</option>
+          <option value="csv">csv</option>
+          <option value="json">json</option>
+        </select>
+        <button type="button" class="btn btn-warning disabled" onclick="submitSelected('xlsx')" id="exelBtn">export</button>
+      </div>
+
 
 {% comment %} 
       <button class="btn btn-primary" type="button"
@@ -187,6 +196,7 @@
 
 <form action="{% url 'PatientsSelectedUsers' %}" method="post" id="SelectedForm">
   {% csrf_token %}
+  <input type="hidden" value="xlsx" name="out_format" id="out_format">
   <input type="hidden" name="method" value="xlsx">
 </form>
 

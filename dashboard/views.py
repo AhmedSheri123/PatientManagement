@@ -822,7 +822,10 @@ def MedicalReportToPDF(request, id):
     rendered = render_to_string('panel/Visits/Reports/MedicalReportPDF/getEmployeeComeDaysDataForAll.html', {'report':report, 'settings':settings, 'img_obj':img_obj})
     # print(rendered)
     path_wkhtmltopdf = r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
-    path_wkhtmltopdf_ub = '/usr/bin/wkhtmltopdf'
+    os_name = os.name
+    if os_name != 'nt':
+        path_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
+
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     path = f'media/reports/{request.user.username}{request.user.id}.pdf'
     pdfkit.from_string(str(rendered), str(BASE_DIR/path), configuration=config, options={"enable-local-file-access": ""})
@@ -842,7 +845,9 @@ def MedicalTestsReportToPDF(request, id):
     rendered = render_to_string('panel/MedicalTests/ReportPDF/getEmployeeComeDaysDataForAll.html', {'report':report, 'settings':settings, 'img_obj':img_obj})
     # print(rendered)
     path_wkhtmltopdf = r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
-    path_wkhtmltopdf_ub = '/usr/bin/wkhtmltopdf'
+    os_name = os.name
+    if os_name != 'nt':
+        path_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     path = f'media/reports/{request.user.username}{request.user.id}.pdf'
     pdfkit.from_string(str(rendered), str(BASE_DIR/path), configuration=config, options={"enable-local-file-access": ""})
@@ -934,15 +939,17 @@ def PatientsSelectedUsers(request):
         userprofiles = UserProfile.objects.filter(profile_type='3', id__in=user_ids).order_by('-id')
 
         method = request.POST.get('method')
+        out_format = request.POST.get('out_format')
         if method == 'xlsx':
-            byte = ModelToDoc(models=userprofiles, fields=['user__first_name', 'user__last_name', 'phone', 'id_number'], rename_fields={'user__first_name':'اسم الاول', 'user__last_name':'اسم الاخير', 'phone':'الهاتف', 'id_number':'رقم الهوية'})
-            # f = open('wr', 'wb')
-            # f.write(byte)
-            # f.close()
+            if out_format:
+                byte = ModelToDoc(models=userprofiles, fields=['user__first_name', 'user__last_name', 'phone', 'id_number'], rename_fields={'user__first_name':'اسم الاول', 'user__last_name':'اسم الاخير', 'phone':'الهاتف', 'id_number':'رقم الهوية'}, export_format=out_format)
+                # f = open('wr', 'wb')
+                # f.write(byte)
+                # f.close()
 
-            res = FileResponse(byte)
-            res['Content-Disposition'] = f'attachment; filename="Patients.xlsx"'
-            return res
+                res = FileResponse(byte)
+                res['Content-Disposition'] = f'attachment; filename="Patients.{out_format}"'
+                return res
         elif method == 'delete':
             for userprofile in userprofiles:userprofile.delete()
             return redirect('ManagePatients')

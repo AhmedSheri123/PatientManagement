@@ -225,7 +225,33 @@ def get_all_model_fields_values(models, fields):
             fields[field].append(value)
     return fields
 
-def ModelToDoc(models=None, fields=None, rename_fields=[]):
+def get_data_export(data={}, export_format=''):
+    buffer = io.BytesIO()
+    out_buffer = b''
+
+    marks_data = pd.DataFrame(data)
+    if export_format == 'xlsx':
+        marks_data.to_excel(buffer)
+        buffer.seek(0)
+        out_buffer = buffer
+
+    elif export_format == 'html':
+        buffer_str = marks_data.to_html()
+        out_buffer = buffer_str
+
+    elif export_format == 'csv':
+        marks_data.to_csv(buffer)
+        buffer.seek(0)
+        out_buffer = buffer
+
+    elif export_format == 'json':
+        marks_data.to_json(buffer)
+        buffer.seek(0)
+        out_buffer = buffer
+
+    return out_buffer
+
+def ModelToDoc(models=None, fields=None, rename_fields=[], export_format='xlsx'):
     result = {}
 
     all_fields = get_all_model_fields(models, postion='')
@@ -247,8 +273,5 @@ def ModelToDoc(models=None, fields=None, rename_fields=[]):
         result = out
 
 
-    marks_data = pd.DataFrame(result)
-    buffer = io.BytesIO()
-    marks_data.to_excel(buffer)
-    buffer.seek(0)
+    buffer = get_data_export(result, export_format)
     return buffer
