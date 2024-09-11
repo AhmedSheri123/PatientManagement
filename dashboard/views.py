@@ -6,7 +6,7 @@ from accounts.fields import GenderFields
 import datetime, json, pdfkit
 from django.utils import timezone
 from django.conf import settings
-from decimal import Decimal
+from decimal import Decimal as Decim
 from .libs import medical_tests_html_to_dict, medical_test_scraper, ModelToDoc, get_general_settings
 from .models import CustomizeMedicalTestsModel, MedicalTestsModel, UploadImageModel, AdminPermissionModel
 from django.template.loader import render_to_string
@@ -19,7 +19,10 @@ from  PIL import Image
 BASE_DIR = settings.BASE_DIR
 # Create your views here.
 
-
+def Decimal(value='0'):
+    value = value.replace(',', '.')
+    value = Decim(value)
+    return value
 
 def img_to_base64(file):
 
@@ -307,6 +310,8 @@ def AddPatientVisit(request):
     patient_id = request.GET.get('patient_id')
     if request.method == 'POST':
         patient_user = request.POST.get('patient_user')
+        if patient_id:
+            patient_user=patient_id
         visitor_pay_amount = request.POST.get('visitor_pay_amount')
         if visitor_pay_amount:
             visitor_pay_amount = Decimal(visitor_pay_amount)
@@ -591,6 +596,8 @@ def AddPatientHomeVisit(request):
         doctor_user = request.POST.get('doctor_user')
         visitor_pay_amount = request.POST.get('visitor_pay_amount')
         visit_distance = request.POST.get('visit_distance')
+        if patient_id:
+            patient_user=patient_id
         if visitor_pay_amount:
             visitor_pay_amount = Decimal(visitor_pay_amount)
 
@@ -848,7 +855,7 @@ def MedicalTestsReportToPDF(request, id):
     os_name = os.name
     if os_name != 'nt':
         path_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
-        
+
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     path = f'media/reports/{request.user.username}{request.user.id}.pdf'
     pdfkit.from_string(str(rendered), str(BASE_DIR/path), configuration=config, options={"enable-local-file-access": ""})

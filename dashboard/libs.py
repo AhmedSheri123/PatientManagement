@@ -85,7 +85,7 @@ def has_permission(user_id, action, resource):
 
 def get_general_settings(file_path):
 
-    file = open(file_path, 'r')
+    file = open(file_path, 'r', encoding='UTF-8')
     settings = {}
     img_obj = None
     data = file.read()
