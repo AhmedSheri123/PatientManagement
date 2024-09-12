@@ -314,14 +314,14 @@ def AddPatientVisit(request):
         patient_user = request.POST.get('patient_user')
         if patient_id:
             patient_user=patient_id
-        visitor_pay_amount = request.POST.get('visitor_pay_amount')
-        if visitor_pay_amount:
-            visitor_pay_amount = Decimal(visitor_pay_amount)
+        # visitor_pay_amount = request.POST.get('visitor_pay_amount')
+        # if visitor_pay_amount:
+            # visitor_pay_amount = Decimal(visitor_pay_amount)
 
         note = request.POST.get('note')
 
         user = User.objects.get(id=patient_user)
-        vist = PatientVistorModel.objects.create(user=user, note=note, visitor_pay_amount=visitor_pay_amount, creation_date=timezone.now())
+        vist = PatientVistorModel.objects.create(user=user, note=note, creation_date=timezone.now())
         vist.save()
         return redirect('ManagePatientVisits')
     return render(request, 'panel/Visits/Normal/AddPatientVisit.html', {'GenderFields':GenderFields, 'patients':patients, 'patient_id':patient_id})
@@ -596,18 +596,18 @@ def AddPatientHomeVisit(request):
     if request.method == 'POST':
         patient_user = request.POST.get('patient_user')
         doctor_user = request.POST.get('doctor_user')
-        visitor_pay_amount = request.POST.get('visitor_pay_amount')
+        # visitor_pay_amount = request.POST.get('visitor_pay_amount')
         visit_distance = request.POST.get('visit_distance')
         if patient_id:
             patient_user=patient_id
-        if visitor_pay_amount:
-            visitor_pay_amount = Decimal(visitor_pay_amount)
+        # if visitor_pay_amount:
+            # visitor_pay_amount = Decimal(visitor_pay_amount)
 
         note = request.POST.get('note')
 
         user = User.objects.get(id=patient_user)
         doctor = User.objects.get(id=doctor_user)
-        vist = PatientVistorModel.objects.create(user=user, doctor=doctor, note=note, is_home_visit=True, visitor_pay_amount=visitor_pay_amount, visit_distance=visit_distance, creation_date=timezone.now())
+        vist = PatientVistorModel.objects.create(user=user, doctor=doctor, note=note, is_home_visit=True, visit_distance=visit_distance, creation_date=timezone.now())
         vist.save()
         return redirect('ManagePatientHomeVisits')
     return render(request, 'panel/Visits/Home/AddPatientHomeVisit.html', {'GenderFields':GenderFields, 'doctors':doctors, 'patients':patients, 'visit_distance_choices':visit_distance_choices, 'patient_id':patient_id})
