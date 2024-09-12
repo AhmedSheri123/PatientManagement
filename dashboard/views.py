@@ -20,8 +20,10 @@ BASE_DIR = settings.BASE_DIR
 # Create your views here.
 
 def Decimal(value='0'):
-    value = value.replace(',', '.')
-    value = Decim(value)
+    if type(value).__name__ == 'str':
+        value = value.replace(',', '.')
+        value = Decim(value)
+        return value
     return value
 
 def img_to_base64(file):
