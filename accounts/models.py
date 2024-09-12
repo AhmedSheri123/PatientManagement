@@ -66,11 +66,11 @@ class PatientVistorModel(models.Model):
     user = models.ForeignKey(User, related_name='vistor_patient', null=True, on_delete=models.CASCADE)
     doctor = models.ForeignKey(User, related_name='doctor', null=True, on_delete=models.CASCADE)
 
-    visitor_pay_amount = models.DecimalField(max_digits=6, decimal_places=2)
+    visitor_pay_amount = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, default=0.00)
     is_home_visit = models.BooleanField(default=False)
     visit_distance = models.CharField(max_length=254, choices=visit_distance_choices, null=True, blank=True)
 
-    note = models.TextField(null=True)
+    note = models.TextField(null=True, blank=True)
     creation_date = models.DateTimeField(null=True, verbose_name="تاريخ الانشاء")
     # def __str__(self):
     #     return self.name
