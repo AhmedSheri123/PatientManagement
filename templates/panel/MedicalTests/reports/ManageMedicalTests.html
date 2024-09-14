@@ -115,7 +115,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">מטופל</th>
-            <th scope="col">التحليل</th>
+            <th scope="col">אָנָלִיזָה</th>
             <th scope="col">הוספה</th>
   
             <th scope="col">אפשריות</th>
@@ -146,11 +146,11 @@
             {% if has_permission %}
             <a href="{% url 'MedicalTestsReportToPDF' job.id %}?download=1" target="_blank" class="ui inverted blue button">
               <i class="bi bi-cloud-arrow-down-fill"></i>
-              تنزيل</a>
+              כדי להוריד</a>
 
             <a href="{% url 'MedicalTestsReportToPDF' job.id %}" target="_blank" class="ui inverted blue button">
             <i class="bi bi-pencil-square"></i>
-            طباعة</a>
+            הֶדפֵּס</a>
             {% endif %}
             {% temp_get_permission_state request.user.id 'view' 'medical_tests' as has_permission%}
             {% if has_permission %}

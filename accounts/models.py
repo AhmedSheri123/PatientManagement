@@ -83,10 +83,10 @@ class PatientMedicalReportModel(models.Model):
     doctor = models.ForeignKey(User, related_name='vistor_doctor', on_delete=models.CASCADE)
     reason_for_visit = models.TextField()
 
-    pulse = models.IntegerField(null=True)
-    pressure = models.IntegerField(null=True)
-    oxygen = models.IntegerField(null=True)
-    sugar = models.IntegerField(null=True)
+    pulse = models.IntegerField(blank=True, null=True)
+    pressure = models.CharField(max_length=255, blank=True, null=True)
+    oxygen = models.IntegerField(blank=True, null=True)
+    sugar = models.IntegerField(blank=True, null=True)
 
     clinical_examination = models.TextField()
     treatment = models.TextField()

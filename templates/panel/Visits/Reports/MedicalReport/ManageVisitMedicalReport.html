@@ -87,7 +87,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">שם פרטי</th>
-            <th scope="col">الطبيب</th>
+            <th scope="col">הרופא</th>
             <th scope="col">הוספה</th>
             <th scope="col">אבחנה</th>
   
@@ -122,11 +122,11 @@
             {% if has_permission %}
             <a href="{% url 'MedicalReportToPDF' job.id %}?download=1" target="_blank" class="ui inverted blue button">
               <i class="bi bi-cloud-arrow-down-fill"></i>
-              تنزيل</a>
+              כדי להוריד</a>
 
             <a href="{% url 'MedicalReportToPDF' job.id %}" target="_blank" class="ui inverted blue button">
               <i class="bi bi-file-earmark-pdf-fill"></i>
-              طباعة</a>
+              הֶדפֵּס</a>
               {% endif %}
               {% temp_get_permission_state request.user.id 'view' 'visit_medical_report' as has_permission%}
               {% if has_permission %}

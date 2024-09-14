@@ -16,7 +16,7 @@
     {% csrf_token %}
 <div class="mt-5">
     <h2 class="ui center aligned icon header bg-primary text-light p-2 rounded-top" >
-        تعديل הגדרות
+        שינוי הגדרות
     </h2>
 </div>
 <div style="background-color: white;">
@@ -35,14 +35,14 @@
         <div class="col-sm-6">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-info-circle-fill"></i></span>
-                <input type="text" name="name" value="{{settings.name}}" class="form-control" placeholder="اسم العيادة">
+                <input type="text" name="name" value="{{settings.name}}" class="form-control" placeholder="שם המרפאה">
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-fill"></i></span>
-                <input type="text" name="number" value="{{settings.number}}" class="form-control" placeholder="رقم العيادة">
+                <input type="text" name="number" value="{{settings.number}}" class="form-control" placeholder="מספר טלפון של המרפאה">
             </div>
         </div>
 
@@ -70,7 +70,7 @@
 <div class="ui center aligned icon header bg-white text-light p-2 rounded-bottom " >
     <button type="submit" class="btn btn-dark mb-3">
         <i class="bi bi-pencil-square"></i>
-        تعديل وحفظ</button>
+        שמירה</button>
 </div>
 </div>
 
