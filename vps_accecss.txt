@@ -4,3 +4,4 @@ Mahranabuabed@2907
 cd /var/www/PatientManagement/
 git pull
 systemctl restart apache2
+

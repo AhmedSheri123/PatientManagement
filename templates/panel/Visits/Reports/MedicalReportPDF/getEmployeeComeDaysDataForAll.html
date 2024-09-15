@@ -10,7 +10,7 @@
     <style>
       .title-border {
         border: 1px solid #b7b7b7;
-        margin-top: 50px;
+        margin-top: 25px;
         
       }
       .title-value {
@@ -349,12 +349,13 @@
                   <td class="first-row">סוכר</td>
     
                 </tr>
+                {% if report.pulse or report.pressure or report.oxygen or report.sugar %}
                 <tr class="row-start" dir="rtl">
                   <td>{{report.pulse}}</td>
                   <td>{{report.pressure}}</td>
                   <td>{{report.oxygen}}%</td>
                   <td>{{report.sugar}}<br></td>
-    
+                  {% else %}{% endif %}
                 </tr>
               </table>
 
