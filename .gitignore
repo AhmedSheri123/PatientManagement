@@ -137,3 +137,5 @@ GitHub.sublime-settings
 db.sqlite3
 /static
 jobFinder/settings.py
+media/reports/09881.pdf
+/media
