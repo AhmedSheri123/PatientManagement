@@ -339,6 +339,7 @@
                 <p style="margin: 0;" class="title-value">{{report.reason_for_visit}}</p>
               </div>
 
+              {% if report.pulse or report.pressure or report.oxygen or report.sugar %}
 
               <p style="font-size: 20px; font-weight: bold;" class="res-title">מדדים חיוניים</p>
               <table style="width: 100%" dir="rtl" class="res-table">
@@ -349,15 +350,14 @@
                   <td class="first-row">סוכר</td>
     
                 </tr>
-                {% if report.pulse or report.pressure or report.oxygen or report.sugar %}
                 <tr class="row-start" dir="rtl">
                   <td>{{report.pulse}}</td>
                   <td>{{report.pressure}}</td>
                   <td>{{report.oxygen}}%</td>
                   <td>{{report.sugar}}<br></td>
-                  {% else %}{% endif %}
                 </tr>
               </table>
+              {% endif %}
 
 
 
