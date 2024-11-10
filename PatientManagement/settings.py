@@ -108,7 +108,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'ar'
 
-TIME_ZONE = 'Israel'
+TIME_ZONE = 'Asia/Jerusalem'
 
 USE_I18N = True
 
