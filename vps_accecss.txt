@@ -5,3 +5,6 @@ cd /var/www/PatientManagement/
 git pull
 systemctl restart apache2
 
+
+
+sudo chmod -R 777 media/
