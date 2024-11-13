@@ -12,7 +12,7 @@ from .models import CustomizeMedicalTestsModel, MedicalTestsModel, UploadImageMo
 from django.template.loader import render_to_string
 from django.http import FileResponse
 from .forms import AdminPermissionModelForm, UserProfileModelForm, UserModelForm
-
+from django.contrib import messages
 import base64, os
 from io import BytesIO
 from  PIL import Image
@@ -675,6 +675,8 @@ def EditCustomizeMedicalTests(request, id):
         medical_test.name = name
         medical_test.data = data
         medical_test.save()
+        messages.success(request, 'تم التعديل بنجاح')
+        return redirect('ManageCustomizeMedicalTests')
     return render(request, 'panel/CustomizeMedicalTests/EditCustomizeMedicalTests.html', {'medical_test':medical_test})
 
 
@@ -770,6 +772,8 @@ def EditMedicalTests(request, id):
         medical_test.data = data
         medical_test.doctor = doctor
         medical_test.save()
+        messages.success(request, 'تم التعديل بنجاح')
+        return redirect('ManageMedicalTests', medical_test.patient.id)
     return render(request, 'panel/MedicalTests/reports/EditMedicalTests.html', {'medical_test':medical_test, 'doctor':doctor, 'doctors':doctors})
 
 
