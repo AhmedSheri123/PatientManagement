@@ -51,7 +51,7 @@
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"><i class="user md icon"></i></span>
                 {% if request.user.userprofile.profile_type == '2' %}
-                    <input type="hidden" class="form-control" name="doctor" value="{{doctor.id}}">
+                    <input type="hidden" class="form-control" name="doctor_user" value="{{doctor.id}}">
                     <input type="text" disabled class="form-control" value="{{doctor.userprofile.get_account_alias_name_display}} - {{doctor.first_name}} {{doctor.last_name}}">
                 {% else %}
                     <select name="doctor_user" class="form-control">
