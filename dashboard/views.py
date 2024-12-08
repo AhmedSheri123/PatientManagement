@@ -187,6 +187,7 @@ def AddPatients(request):
         birth_date = datetime.datetime.strptime(birth_date, '%Y-%m-%d').date()
 
         if userprofiles.filter(id_number=id_number).exists():
+            messages.error(request, 'המטופל כבר נוכח')
             return redirect(reverse('ManagePatients')+f'?id_number={id_number}')
 
         user = User.objects.create(username=username, first_name=first_name, last_name=last_name)
