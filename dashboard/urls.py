@@ -12,6 +12,7 @@ urlpatterns = [
     #Vists
     path('ManagePatientVisits', views.ManagePatientVisits, name='ManagePatientVisits'),
     path('AddPatientVisit', views.AddPatientVisit, name='AddPatientVisit'),
+    path('AddPatientVisitImmediately/<int:patient_user>', views.AddPatientVisitImmediately, name='AddPatientVisitImmediately'),
     path('EditPatientVisit/<int:id>', views.EditPatientVisit, name='EditPatientVisit'),
     path('DeletePatientVisit/<int:id>', views.DeletePatientVisit, name='DeletePatientVisit'),
     

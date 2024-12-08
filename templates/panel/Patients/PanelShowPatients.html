@@ -147,7 +147,8 @@
 
             {% temp_get_permission_state request.user.id 'add' 'normal_visit' as has_permission%}
             {% if has_permission %}
-            <a href="{% url 'AddPatientVisit' %}?patient_id={{job.user.id}}" class="btn btn-primary mb-3">
+
+            <a href="{% url 'AddPatientVisitImmediately' job.user.id%}" class="btn btn-primary mb-3">
               <i class="bi bi-person-fill-add"></i>
               רגיל</a>
               {% endif %}

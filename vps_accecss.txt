@@ -8,3 +8,4 @@ systemctl restart apache2
 
 
 sudo chmod -R 777 media/
+nano /etc/apache2/sites-available/demo.conf

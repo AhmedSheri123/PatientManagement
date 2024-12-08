@@ -173,6 +173,7 @@ def ManagePatients(request):
 
 def AddPatients(request):
     if request.method == 'POST':
+        userprofiles = UserProfile.objects.filter(profile_type='3').order_by('-id')
         username = CompanyRandomNumCodeGen()
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -184,6 +185,9 @@ def AddPatients(request):
         birth_date = request.POST.get('birth_date')
         addVisit = request.POST.get('addVisit')
         birth_date = datetime.datetime.strptime(birth_date, '%Y-%m-%d').date()
+
+        if userprofiles.filter(id_number=id_number).exists():
+            return redirect(reverse('ManagePatients')+f'?id_number={id_number}')
 
         user = User.objects.create(username=username, first_name=first_name, last_name=last_name)
         userprofile = UserProfile.objects.create(user=user, profile_type='3', phone=phone, gender=gender, birth_date=birth_date, address=address, id_number=id_number)
@@ -199,6 +203,7 @@ def AddPatients(request):
         
         return redirect('ManagePatients')
     return render(request, 'panel/Patients/AddPatients.html', {'GenderFields':GenderFields})
+
 
 def EditPatients(request, id):
     user = User.objects.get(id=id)
@@ -325,6 +330,14 @@ def AddPatientVisit(request):
         vist.save()
         return redirect('ManagePatientVisits')
     return render(request, 'panel/Visits/Normal/AddPatientVisit.html', {'GenderFields':GenderFields, 'patients':patients, 'patient_id':patient_id})
+
+
+def AddPatientVisitImmediately(request, patient_user):
+    user = User.objects.get(id=patient_user)
+    vist = PatientVistorModel.objects.create(user=user, creation_date=timezone.now())
+    vist.save()
+    return redirect('ManagePatientVisits')
+
 
 
 def EditPatientVisit(request, id):
