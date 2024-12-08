@@ -198,7 +198,7 @@ def AddPatients(request):
         os.mkdir(BASE_DIR / f'media/manager/{user.id}')
         
         if addVisit == '1':
-            return redirect(reverse('AddPatientVisit')+f'?patient_id={user.id}')
+            return redirect('AddPatientVisitImmediately', user.id)
         elif addVisit == '2':
             return redirect(reverse('AddPatientHomeVisit')+f'?patient_id={user.id}')
         
