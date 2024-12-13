@@ -337,7 +337,8 @@ def AddPatientVisitImmediately(request, patient_user):
     user = User.objects.get(id=patient_user)
     vist = PatientVistorModel.objects.create(user=user, creation_date=timezone.now())
     vist.save()
-    return redirect('ManagePatientVisits')
+    messages.success(request, 'הביקור נוסף בהצלחה')
+    return redirect('AddMedicalReport', vist.id)
 
 
 
