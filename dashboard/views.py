@@ -198,7 +198,7 @@ def AddPatients(request):
         os.mkdir(BASE_DIR / f'media/manager/{user.id}')
         
         if addVisit == '1':
-            return redirect('AddMedicalReport', user.id)
+            return redirect(reverse('AddPatientVisit')+f'?patient_id={user.id}')
         elif addVisit == '2':
             return redirect(reverse('AddPatientHomeVisit')+f'?patient_id={user.id}')
         
@@ -324,12 +324,12 @@ def AddPatientVisit(request):
         # if visitor_pay_amount:
             # visitor_pay_amount = Decimal(visitor_pay_amount)
 
-        note = request.POST.get('note')
+        # note = request.POST.get('note')
 
         user = User.objects.get(id=patient_user)
-        vist = PatientVistorModel.objects.create(user=user, note=note, creation_date=timezone.now())
+        vist = PatientVistorModel.objects.create(user=user, creation_date=timezone.now())
         vist.save()
-        return redirect('ManagePatientVisits')
+        return redirect('AddMedicalReport', vist.id)
     return render(request, 'panel/Visits/Normal/AddPatientVisit.html', {'GenderFields':GenderFields, 'patients':patients, 'patient_id':patient_id})
 
 
