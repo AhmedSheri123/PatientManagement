@@ -109,9 +109,9 @@ table {
           document.getElementById('offcanvasScrolling').style.width = '400px'
         })
 
-        if (screen.width <=768) {
-          document.getElementById('offcanvasScrollingBTN').click();document.getElementById('offcanvasScrollingBTN').click();
-        }
+        // if (screen.width <=768) {
+        //   document.getElementById('offcanvasScrollingBTN').click();document.getElementById('offcanvasScrollingBTN').click();
+        // }
     </script>
 
 
@@ -156,14 +156,35 @@ table {
   
       };
 
-      
+
       
       $(document).ready(function(){
         {% for message in messages %}
         showToast(randomGen(), 'admin', '{{message}}', '')
         {% endfor %}
+
+
      });
 
+    function hideOffcanvas() {
+      const myOffcanvas = document.getElementById('offcanvasScrolling');
+
+      let bsOffcanvas = bootstrap.Offcanvas.getInstance(myOffcanvas);
+
+          if (bsOffcanvas) {
+            if (window.innerWidth < 600) {
+              bsOffcanvas.hide();
+            }
+          } else {
+            setTimeout(hideOffcanvas, 100);
+          }
+
+    }
+
+     document.addEventListener('DOMContentLoaded', function () {
+
+      hideOffcanvas()
+     })
       </script>
 </body>
 
